@@ -318,7 +318,7 @@ public class FrmTorneo extends javax.swing.JFrame {
         boolean encontrado = false;
         for(Municipio obMunicipio : listaMunicipios){
             if(id == obMunicipio.getId()){
-                if(JOptionPane.showConfirmDialog(this, "Esta seguro de eliminar el equipo") ==0){
+                if(JOptionPane.showConfirmDialog(this, "Esta seguro de eliminar el Municipio") ==0){
                     listaMunicipios.remove(obMunicipio);
                     llenarListaMunicipios();
                 }
@@ -352,15 +352,56 @@ public class FrmTorneo extends javax.swing.JFrame {
     }
     
     private void btnBuscarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEquipoActionPerformed
-        // TODO add your handling code here:
+        int id = Integer.parseInt(txtIdEquipo.getText());
+        boolean econtrado = false;
+        for (Equipo objEquipo : listaEquipos){
+            if(id == objEquipo.getId()){
+                txtNombreEquipo.setText(objEquipo.getNombre());
+                txtDtEquipo.setText(objEquipo.getDt());
+                cbxMunicipios.setSelectedItem(objEquipo);
+                econtrado = true;
+                break;
+            }
+        }
+        if(econtrado == false){
+            JOptionPane.showMessageDialog(this, "El equipo no fue encontrado");
+        }
     }//GEN-LAST:event_btnBuscarEquipoActionPerformed
 
     private void btnActualizarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEquipoActionPerformed
-        // TODO add your handling code here:
+        int id = Integer.parseInt(txtIdEquipo.getText());
+        boolean encontrado = false;
+        for(Equipo objEquipo : listaEquipos){
+            if(id == objEquipo.getId()){
+                objEquipo.setNombre(txtNombreEquipo.getText());
+                objEquipo.setDt(txtDtEquipo.getText());
+                objEquipo.setMunicipio((Municipio) cbxMunicipios.getSelectedItem());
+                encontrado = true;
+                llenarListaMunicipios();
+                break;
+            }
+        }
+        if(encontrado == false){
+            JOptionPane.showMessageDialog(this, "El Equipo no fue encontrado");
+        }
     }//GEN-LAST:event_btnActualizarEquipoActionPerformed
 
     private void btnEliminarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEquipoActionPerformed
-        // TODO add your handling code here:
+        int id = Integer.parseInt(txtIdEquipo.getText());
+        boolean encontrado = false;
+        for(Equipo objEquipos : listaEquipos){
+            if(id == objEquipos.getId()){
+                if(JOptionPane.showConfirmDialog(this, "Esta seguro de eliminar el equipo") ==0){
+                    listaEquipos.remove(objEquipos);
+                    llenarListaEquipos();
+                }
+                encontrado = true;
+                break;
+            }
+        }
+        if(encontrado ==false){
+            JOptionPane.showMessageDialog(this, "No se encontro el equipo");
+        }
     }//GEN-LAST:event_btnEliminarEquipoActionPerformed
     
     public void llenarListaMunicipios(){
